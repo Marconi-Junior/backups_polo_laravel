@@ -1,0 +1,12 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "wsl.exe",
+            "args": [
+                "/home/polo/.config/herd-lite/bin/php",
+                "/home/polo/Laravel/backups_polo/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}

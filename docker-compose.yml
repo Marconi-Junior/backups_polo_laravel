@@ -1,0 +1,33 @@
+networks:
+    app_network:
+
+volumes:
+    pg_data:
+
+services:
+    web:
+        build:
+            context: .
+            dockerfile: .docker/php/Dockerfile
+            args:
+                - UID=${UID:-1000}
+                - GID=${GID:-1000}
+        ports:
+            - 80:80
+        volumes:
+            - ./:/var/www/html
+        networks:
+            - app_network
+
+    db:
+        image: postgres
+        ports:
+            - 5432:5432
+        volumes:
+            - pg_data:/var/lib/postgresql
+        environment:
+            POSTGRES_DB: backups_polo
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        networks:
+            - app_network
