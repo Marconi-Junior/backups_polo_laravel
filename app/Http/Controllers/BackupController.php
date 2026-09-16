@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Backups;
+use App\Models\Backup;
 use Illuminate\Http\Request;
 
 class BackupController extends Controller
@@ -12,8 +12,8 @@ class BackupController extends Controller
      */
     public function index()
     {
-        $backups = Backups::all();
-        return view('backups.index', compact('backups'));
+        $backup = Backup::all();
+        return view('backups.index', compact('backup'));
     }
 
     /**
@@ -44,7 +44,7 @@ class BackupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Backups $backups)
+    public function show(Backup $backup)
     {
         //
     }
@@ -52,7 +52,7 @@ class BackupController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Backups $backups)
+    public function edit(Backup $backup)
     {
         return view('backups.edit', compact('backup'));
     }
@@ -60,7 +60,7 @@ class BackupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Backups $backups)
+    public function update(Request $request, Backup $backup)
     {
         $request->validate([
             'ip'      => 'required|string|max:255',
@@ -77,7 +77,7 @@ class BackupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Backups $backups)
+    public function destroy(Backup $backups)
     {
         $backup->delete();
             return redirect()->route('backups.index')->with('success', 'Configuração');

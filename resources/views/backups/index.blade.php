@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Configurações de Backup') }}
+                {{ __('Gestão de Backup') }}
             </h2>
             <a href="{{ route('backups.create') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white transition ease-in-out duration-150">
                 + Nova Conexão
@@ -22,7 +22,7 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="border-b dark:border-gray-700">
-                                <th class="py-2">IP</th>
+                                <th class="py-2">IP/Host</th>
                                 <th class="py-2">Porta</th>
                                 <th class="py-2">Banco de Dados</th>
                                 <th class="py-2">Usuário</th>
@@ -30,7 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($backups as $backup)
+                            @forelse($backup as $backup)
                                 <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
                                     <td class="py-3">{{ $backup->ip }}</td>
                                     <td class="py-3">{{ $backup->porta }}</td>

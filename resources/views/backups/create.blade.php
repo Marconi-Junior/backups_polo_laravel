@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Nova Configuração de Backup') }}
+            {{ __('Nova Conexão') }}
         </h2>
     </x-slot>
 
@@ -15,7 +15,7 @@
                     <div class="grid grid-cols-3 gap-4">
                         <!-- Campo IP -->
                         <div class="col-span-2">
-                            <x-input-label for="ip" :value="__('Endereço IP')" />
+                            <x-input-label for="ip" :value="__('IP/Host')" />
                             <x-text-input id="ip" name="ip" type="text" class="mt-1 block w-full" placeholder="192.168.1.1" required autofocus />
                             <x-input-error class="mt-2" :messages="$errors->get('ip')" />
                         </div>
@@ -30,14 +30,14 @@
 
                     <!-- Campo Banco -->
                     <div>
-                        <x-input-label for="banco" :value="__('Nome do Banco de Dados')" />
+                        <x-input-label for="banco" :value="__('Banco de Dados')" />
                         <x-text-input id="banco" name="banco" type="text" class="mt-1 block w-full" required />
                         <x-input-error class="mt-2" :messages="$errors->get('banco')" />
                     </div>
 
                     <!-- Campo Usuário -->
                     <div>
-                        <x-input-label for="usuario" :value="__('Usuário da Base')" />
+                        <x-input-label for="usuario" :value="__('Usuário')" />
                         <x-text-input id="usuario" name="usuario" type="text" class="mt-1 block w-full" required />
                         <x-input-error class="mt-2" :messages="$errors->get('usuario')" />
                     </div>
