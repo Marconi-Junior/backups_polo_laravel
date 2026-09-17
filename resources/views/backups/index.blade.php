@@ -16,8 +16,7 @@
                 
                 @if(session('success'))
                     <div class="mb-4 text-green-600 font-medium text-sm">{{ session('success') }}</div>
-                @endif
-
+                @endif                
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -26,20 +25,20 @@
                                 <th class="py-2">Porta</th>
                                 <th class="py-2">Banco de Dados</th>
                                 <th class="py-2">Usuário</th>
-                                <th class="py-2 text-right">Ações</th>
+                                <th class="py-2">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($backup as $backup)
-                                <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td class="py-3">{{ $backup->ip }}</td>
-                                    <td class="py-3">{{ $backup->porta }}</td>
-                                    <td class="py-3">{{ $backup->banco }}</td>
-                                    <td class="py-3">{{ $backup->usuario }}</td>
-                                    <td class="py-3 text-right flex justify-end gap-4">
-                                        <a href="{{ route('backups.edit', $backup->id) }}" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400">Editar</a>
+                            @forelse($backup as $item)
+                                <tr class="border-b text-center dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td class="py-3">{{ $item->ip }}</td>
+                                    <td class="py-3">{{ $item->porta }}</td>
+                                    <td class="py-3">{{ $item->banco }}</td>
+                                    <td class="py-3">{{ $item->usuario }}</td>
+                                    <td class="py-3 flex justify-center gap-4">
+                                        <a href="{{ route('backups.edit', $item->id) }}" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400">Editar</a>
                                         
-                                        <form action="{{ route('backups.destroy', $backup->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta configuração?')">
+                                        <form action="{{ route('backups.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta conexão?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400">Excluir</button>
@@ -53,7 +52,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                </div>
+                </div> 
 
             </div>
         </div>

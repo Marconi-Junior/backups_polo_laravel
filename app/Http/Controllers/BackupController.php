@@ -38,7 +38,7 @@ class BackupController extends Controller
         ]);
         Backup::create($request->all());
 
-        return redirect()->route('backups.index')->with('success', 'Configuração');
+        return redirect()->route('backups.index')->with('success', 'Conexão criada com sucesso');
     }
 
     /**
@@ -46,7 +46,7 @@ class BackupController extends Controller
      */
     public function show(Backup $backup)
     {
-        //
+        return view('backups.show', compact('backup'));
     }
 
     /**
@@ -71,15 +71,21 @@ class BackupController extends Controller
         ]);
 
         $dados = $request->all();
-        return redirect()->route('backups.index')->with('success', 'Configuração');
+        
+        if (empty($dados['senha'])){
+            unset($dados['senha']);
+        }
+
+        $backup->update($dados);
+        return redirect()->route('backups.index')->with('success', 'Dados atualizados com sucesso');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Backup $backups)
+    public function destroy(Backup $backup)
     {
         $backup->delete();
-            return redirect()->route('backups.index')->with('success', 'Configuração');
+            return redirect()->route('backups.index')->with('success', 'Deletado com sucesso');
     }
 }
