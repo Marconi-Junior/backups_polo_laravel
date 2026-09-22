@@ -12,5 +12,6 @@ class Backup extends Model
         'banco',
         'usuario',
         'senha',
+        'cron',
     ];
 }
