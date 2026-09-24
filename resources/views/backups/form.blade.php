@@ -1,30 +1,33 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Editar Conexão') }}
+            {{ $backup->exists ? __('Editar Conexão') : __('Nova Conexão') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="mx-auto sm:px-6 lg:px-8" style="width: 30%">
+        <div class="w-full mx-auto sm:px-6 lg:px-8" style="max-width: 30%">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 
-                <form method="POST" action="{{ route('backups.update', $backup->id) }}" class="space-y-6">
+                <form method="POST" action="{{ $backup->exists ? route('backups.update', $backup->id) : route('backups.store') }}" class="space-y-6">
                     @csrf
-                    @method('PUT')
+
+                    @if($backup->exists)
+                        @method('PUT')
+                    @endif
 
                     <div class="grid grid-cols-3 gap-4">
                         <!-- Campo IP -->
                         <div class="col-span-2">
                             <x-input-label for="ip" :value="__('IP/Host')" />
-                            <x-text-input id="ip" name="ip" type="text" class="mt-1 block w-full" :value="old('ip', $backup->ip)" required autofocus />
+                            <x-text-input id="ip" name="ip" type="text" class="mt-1 block w-full" placeholder="192.168.1.1" :value="old('ip', $backup->ip)" required autofocus />
                             <x-input-error class="mt-2" :messages="$errors->get('ip')" />
                         </div>
 
                         <!-- Campo Porta -->
                         <div>
                             <x-input-label for="porta" :value="__('Porta')" />
-                            <x-text-input id="porta" name="porta" type="text" class="mt-1 block w-full" :value="old('porta', $backup->porta)" required />
+                            <x-text-input id="porta" name="porta" type="text" class="mt-1 block w-full" placeholder="3306" :value="old('porta', $backup->porta)" required />
                             <x-input-error class="mt-2" :messages="$errors->get('porta')" />
                         </div>
                     </div>
@@ -43,13 +46,11 @@
 
                         <!-- O Novo Select Baseado no Padrão Breeze -->
                         <x-select-input id="frequencia" name="frequencia" class="block mt-1 w-full">
-                            <option value="" disabled selected class="text-gray-400 dark:text-gray-500">
-                                {{ __('Selecionar...') }}
-                            </option>    
-                            <option value="trimestral">Trimestral</option>
-                            <option value="mensal">Mensal. Todo dia 1</option>
-                            <option value="semanal">Semanal. Toda segunda-feira</option>
-                            <option value="alternado">Seg, Qua e Sex</option>
+                            <option value="nunca" <?php echo old('frequencia', $backup->frequencia) == 'nunca' ? 'selected' : ''?>>Nunca</option>
+                            <option value="trimestral" <?php echo old('frequencia', $backup->frequencia) == 'trimestral' ? 'selected' : ''?>>Trimestral, dia 1 à meia-noite</option>
+                            <option value="mensal" <?php echo old('frequencia', $backup->frequencia) == 'mensal' ? 'selected' : ''?>>Mensal, todo dia 1 à meia-noite</option>
+                            <option value="semanal" <?php echo old('frequencia', $backup->frequencia) == 'semanal' ? 'selected' : ''?>>Semanal, toda segunda-feira à meia-noite</option>
+                            <option value="alternado" <?php echo old('frequencia', $backup->frequencia) == 'alternado' ? 'selected' : ''?>>Seg, Qua e Sex à meia-noite</option>                            
                         </x-select-input>
 
                         <!-- Mensagem de Erro do Breeze (opcional) -->
@@ -66,14 +67,18 @@
                     <!-- Campo Senha -->
                     <div>
                         <x-input-label for="senha" :value="__('Senha')" />
-                        <x-text-input id="senha" name="senha" type="password" class="mt-1 block w-full" />
-                        <p class="text-xs text-gray-500 mt-1">Deixe em branco para manter a senha atual.</p>
+                        <x-text-input id="senha" name="senha" type="password" class="mt-1 block w-full" action="{{ $backup->exists ? '' : 'required' }}" />
+                        
+                        @if($backup->exists)
+                            <p class="text-xs text-gray-500 mt-1">Deixe em branco para manter a senha atual.</p>
+                        @endif
+                        
                         <x-input-error class="mt-2" :messages="$errors->get('senha')" />
                     </div>
 
                     <div class="flex items-center justify-end gap-4 w-full">
                         <a href="{{ route('backups.index') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">Cancelar</a>
-                        <x-primary-button>{{ __('Atualizar Conexão') }}</x-primary-button>            
+                        <x-primary-button>{{ __('Salvar') }}</x-primary-button>
                     </div>
                 </form>
 

@@ -15,13 +15,14 @@ class BackupController extends Controller
         $backup = Backup::all();
         return view('backups.index', compact('backup'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('backups.create');
+        $backup = new Backup();
+        return view('backups.form', compact('backup'));
     }
 
     /**
@@ -54,7 +55,7 @@ class BackupController extends Controller
      */
     public function edit(Backup $backup)
     {
-        return view('backups.edit', compact('backup'));
+        return view('backups.form', compact('backup'));
     }
 
     /**
