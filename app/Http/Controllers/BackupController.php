@@ -31,11 +31,12 @@ class BackupController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ip'      => 'required|string|max:255',
-            'porta'   => 'required|string|max:10',
-            'banco'   => 'required|string|max:255',
-            'usuario' => 'required|string|max:255',
-            'senha'   => 'required|string',
+            'ip'         => 'required|string|max:255',
+            'porta'      => 'required|string|max:10',
+            'banco'      => 'required|string|max:255',
+            'usuario'    => 'required|string|max:255',
+            'senha'      => 'required|string',
+            'frequencia' => 'required|string|in:nunca,trimestral,mensal,semanal,alternado',
         ]);
         Backup::create($request->all());
 
@@ -64,11 +65,12 @@ class BackupController extends Controller
     public function update(Request $request, Backup $backup)
     {
         $request->validate([
-            'ip'      => 'required|string|max:255',
-            'porta'   => 'required|string|max:10',
-            'banco'   => 'required|string|max:255',
-            'usuario' => 'required|string|max:255',
-            'senha'   => 'nullable|string',
+            'ip'         => 'required|string|max:255',
+            'porta'      => 'required|string|max:10',
+            'banco'      => 'required|string|max:255',
+            'usuario'    => 'required|string|max:255',
+            'senha'      => 'nullable|string',
+            'frequencia' => 'required|string|in:nunca,trimestral,mensal,semanal,alternado',
         ]);
 
         $dados = $request->all();

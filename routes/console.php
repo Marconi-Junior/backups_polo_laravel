@@ -7,16 +7,35 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\Backup;
 
 // Verifica se a tabela já existe para evitar erros ao rodar migrations do zero
-if (Schema::hasTable('backups')){
+if (Schema::hasTable('backups') && Schema::hasColumn('backups', 'frequencia')){
     // Busca todas as conexões cadastradas pelos usuários
-    $backups = Backup::all();
+    $backups = Backup::where('frequencia', '!=', 'nunca')->get();
 
     foreach ($backups as $backup){
-        // Agenda o comando criado passando o ID do banco e a expressão CRON salva pelo usuário
-        Schedule::command("db:run-backup {$backup->id}")
-            ->cron($backup->cron)
+        // Cria o agendamento do comando passando o ID
+        $scheduledCommand = Schedule::command("db:run-backup {$backup->id}")
+            //->cron($backup->cron)
             ->withoutOverlapping() // Segurança crucial para dumps pesados
             ->appendOutputTo(storage_path('logs/backup-schedule.log')); // Guarda logs do resultado
+
+        // Vincula o método nativo do Laravel correspondente ao select
+        switch($backup->frequencia){
+            case 'trimestral':
+                $scheduledCommand->cron('0 0 1 */3 *'); 
+                break;
+
+            case 'mensal':
+                $scheduledCommand->monthly();
+                break;
+
+            case 'semanal':
+                $scheduledCommand->weekly();
+                break;
+
+            case 'alternado':
+                $scheduledCommand->cron('0 0 * * 1,3,5');
+                break;
+        }
     }
 }
 

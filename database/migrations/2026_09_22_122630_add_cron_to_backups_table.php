@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('backups', function (Blueprint $table) {
-            $table->string('cron')->default('0 0 * * *');
+            $table->string('frequencia')->default('0 0 * * *');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('backups', function (Blueprint $table) {
-            //
+            $table->dropColumn('frequencia');
         });
     }
 };
