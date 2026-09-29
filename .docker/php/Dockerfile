@@ -42,4 +42,13 @@ RUN useradd -u ${GID} -ms /bin/bash -g www www
 
 COPY --chown=www-data:www-data . /var/www
 
+# Garante que o cron está instalado
+RUN apt-get update && apt-get install -y cron tzdata
+
+# Cria o arquivo de cron do sistema a disparar A CADA MINUTO
+RUN echo "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n* * * * * root /usr/local/bin/php /var/www/html/artisan schedule:run >> /tmp/laravel-scheduler.log 2>&1" > /etc/cron.d/laravel-scheduler
+
+# Define as permissões exigidas pelo Linux
+RUN chown root:root /etc/cron.d/laravel-scheduler && chmod 0644 /etc/cron.d/laravel-scheduler
+
 USER ${UID}

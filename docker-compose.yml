@@ -12,6 +12,9 @@ services:
             args:
                 - UID=${UID:-1000}
                 - GID=${GID:-1000}
+        environment: 
+            - TZ=America/Fortaleza
+        command: sh -c "service cron start && apache2-foreground"
         ports:
             - 80:80
         volumes:
@@ -31,3 +34,4 @@ services:
             POSTGRES_PASSWORD: postgres
         networks:
             - app_network
+

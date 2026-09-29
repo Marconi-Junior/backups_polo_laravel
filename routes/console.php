@@ -21,19 +21,20 @@ if (Schema::hasTable('backups') && Schema::hasColumn('backups', 'frequencia')){
         // Vincula o método nativo do Laravel correspondente ao select
         switch($backup->frequencia){
             case 'trimestral':
-                $scheduledCommand->cron('0 0 1 */3 *'); 
+                $scheduledCommand->cron('0 0 1 */3 *')->timezone('America/Fortaleza');
                 break;
 
             case 'mensal':
-                $scheduledCommand->monthly();
+                $scheduledCommand->monthly()->timezone('America/Fortaleza');
                 break;
 
             case 'semanal':
-                $scheduledCommand->weekly();
+                $scheduledCommand->weekly()->timezone('America/Fortaleza');
                 break;
 
             case 'alternado':
-                $scheduledCommand->cron('0 0 * * 1,3,5');
+                $scheduledCommand->cron('0 0 * * 1,3,5')->timezone('America/Fortaleza');
+                // $scheduledCommand->everyMinute()->timezone('America/Fortaleza');
                 break;
         }
     }

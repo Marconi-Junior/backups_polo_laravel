@@ -15,3 +15,4 @@ class Backup extends Model
         'frequencia',
     ];
 }
+
