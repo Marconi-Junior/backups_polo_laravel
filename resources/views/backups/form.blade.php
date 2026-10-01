@@ -47,10 +47,10 @@
                         <!-- O Novo Select Baseado no Padrão Breeze -->
                         <x-select-input id="frequencia" name="frequencia" class="block mt-1 w-full">
                             <option value="nunca" <?php echo old('frequencia', $backup->frequencia) == 'nunca' ? 'selected' : ''?>>Nunca</option>                                    
-                            <option value="trimestral" <?php echo old('frequencia', $backup->frequencia) == 'trimestral' ? 'selected' : ''?>>Trimestral, dia 1 à meia-noite</option>
-                            <option value="mensal" <?php echo old('frequencia', $backup->frequencia) == 'mensal' ? 'selected' : ''?>>Mensal, todo dia 1 à meia-noite</option>
-                            <option value="semanal" <?php echo old('frequencia', $backup->frequencia) == 'semanal' ? 'selected' : ''?>>Semanal, toda segunda-feira à meia-noite</option>
-                            <option value="alternado" <?php echo old('frequencia', $backup->frequencia) == 'alternado' ? 'selected' : ''?>>Seg, Qua e Sex à meia-noite</option>                            
+                            <option value="trimestral" <?php echo old('frequencia', $backup->frequencia) == 'trimestral' ? 'selected' : ''?>>TRIMESTRAL (dia 1 à meia-noite)</option>
+                            <option value="mensal" <?php echo old('frequencia', $backup->frequencia) == 'mensal' ? 'selected' : ''?>>MENSAL (todo dia 1 à meia-noite)</option>
+                            <option value="semanal" <?php echo old('frequencia', $backup->frequencia) == 'semanal' ? 'selected' : ''?>>SEMANAL (toda segunda-feira à meia-noite)</option>
+                            <option value="alternado" <?php echo old('frequencia', $backup->frequencia) == 'alternado' ? 'selected' : ''?>>SEG, QUA e SEX (à meia-noite)</option>
                         </x-select-input>
 
                         <!-- Mensagem de Erro do Breeze (opcional) -->

@@ -52,9 +52,11 @@
                 </div> 
 
             </div>
-            <div class="flex justify-end mt-8">
+            <!-- <div class="flex justify-end mt-8"> -->
+            <div class="flex items-center justify-end mt-8 gap-4 w-full">
+            <a href="{{ route('dashboard') }}" class="text-base text-gray-600 dark:text-gray-400 mr-2 hover:underline">Voltar</a>
             <a href="{{ route('backups.create') }}" class="inline-flex items-center px-4 py-2 bg-emerald-800 dark:bg-emerald-500 border border-transparent rounded-md font-semibold text-xs text-white dark:text-emerald-800 uppercase tracking-widest hover:bg-emerald-700 dark:hover:bg-white transition ease-in-out duration-150">
-                    + Nova Conexão
+                + Nova Conexão
             </a>
             </div>
         </div>        
