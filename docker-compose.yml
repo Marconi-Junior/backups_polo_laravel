@@ -22,6 +22,14 @@ services:
         networks:
             - app_network
 
+    mailpit:
+        image: 'axllent/mailpit:latest'
+        ports:
+        - '1025:1025'
+        - '8025:8025'
+        networks:
+            - app_network
+
     db:
         image: postgres
         ports:

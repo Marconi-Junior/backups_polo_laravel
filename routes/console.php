@@ -33,7 +33,7 @@ if (Schema::hasTable('backups') && Schema::hasColumn('backups', 'frequencia')){
                 break;
 
             case 'alternado':
-                $scheduledCommand->cron('0 12 * * 1,3,5')->timezone('America/Fortaleza');
+                $scheduledCommand->cron('0 0 * * 1,3,5')->timezone('America/Fortaleza');
                 // $scheduledCommand->everyMinute()->timezone('America/Fortaleza');
                 break;
         }
