@@ -64,6 +64,16 @@ class RunDatabaseBackup extends Command
             if ($result->successful() && file_exists($targetPath) && filesize($targetPath) > 0){
                 $this->info("Backup concluído com sucesso! Salvo como: backups/{$filename}");
                 
+                //Bloco de sucesso, envio para o google drive
+                $this->info("Enviando cópia para o Google Drive...");
+
+                //Lemos o arquivo da pasta local física e enviamos para o disco 'google'
+                Storage::disk('google')->put(
+                    $filename,
+                    file_get_contents($targetPath)
+                );
+                $this->info("Cópia salva no Google Drive com sucesso!");                
+                
                 // Bloco de sucesso, envio do e-mail de confirmação
                 Notification::route('mail', $emailAdmin)->notify(
                     new BackupStatusNotification(

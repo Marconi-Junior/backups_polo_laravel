@@ -32,7 +32,7 @@ class BackupStatusNotification extends Notification
             : '🚨 FALHA: Erro ao Realizar Backup';
 
         $textoPrincipal = $this->status === 'sucesso' 
-            ? 'O backup agendado do banco de dados foi concluído sem problemas.' 
+            ? 'O backup agendado do banco de dados foi concluído sem problemas.'
             : 'Atenção: Ocorreu um erro ao tentar gerar o backup agendado.';
 
         return (new MailMessage)
