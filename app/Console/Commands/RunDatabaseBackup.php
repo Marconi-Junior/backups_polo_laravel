@@ -66,13 +66,13 @@ class RunDatabaseBackup extends Command
                 
                 //Bloco de sucesso, envio para o google drive
                 $this->info("Enviando cópia para o Google Drive...");
-
+             
                 //Lemos o arquivo da pasta local física e enviamos para o disco 'google'
                 Storage::disk('google')->put(
                     $filename,
                     file_get_contents($targetPath)
                 );
-                $this->info("Cópia salva no Google Drive com sucesso!");                
+                $this->info("Cópia salva no Google Drive com sucesso!");
                 
                 // Bloco de sucesso, envio do e-mail de confirmação
                 Notification::route('mail', $emailAdmin)->notify(

@@ -14,11 +14,19 @@ services:
                 - GID=${GID:-1000}
         environment: 
             - TZ=America/Fortaleza
+            - CURL_IPRESOLVE=1
+        sysctls:
+            - net.ipv6.conf.all.disable_ipv6=1
+            - net.ipv6.conf.default.disable_ipv6=1
+
         command: sh -c "service cron start && apache2-foreground"
         ports:
             - 80:80
         volumes:
-            - ./:/var/www/html
+            - ./:/var/www/html        
+        dns:
+            - 8.8.8.8
+            - 1.1.1.1
         networks:
             - app_network
 
