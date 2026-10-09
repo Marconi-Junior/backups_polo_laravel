@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Filesystem;
-use Masbug\FlysystemGoogleDrive\GoogleDriveAdapter;
+use Masbug\Flysystem\GoogleDriveAdapter;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,43 +25,47 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Support\Facades\Storage::extend('google', function ($app, $config) {
             $client = new \Google\Client();
             
-            // Autenticação estática local via JSON - sem chamadas de rede externas para login
-            $client->setAuthConfig(base_path('google-service-account.json'));
-            $client->addScope(\Google\Service\Drive::DRIVE);
+            // Força o uso de IPv4 resolvendo o problema crônico do WSL2
+            $guzzleClient = new \GuzzleHttp\Client([
+                \GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => 20,
+                \GuzzleHttp\RequestOptions::TIMEOUT => 60,
+                'curl' => [
+                    CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4
+                ]
+            ]);
+            $client->setHttpClient($guzzleClient);
 
+            $client->setClientId($config['clientId']);
+            $client->setClientSecret($config['clientSecret']);
+            $client->refreshToken($config['refreshToken']);
+            
             $service = new \Google\Service\Drive($client);
             
-            // Usamos o adaptador padrão de arquivos locais do Laravel adaptado para a API do Google
-            // Isso elimina para sempre a necessidade do pacote "masbug" ou "yaza"
-            $adapter = new \League\Flysystem\Local\LocalFilesystemAdapter(storage_path('app/backups'));
+            // Prepara as opções do adaptador
+            $options = [];
+            if (!empty($config['folderId'])) {
+                // Isso diz para o pacote: "Use este ID longo como a raiz padrão"
+                $options['rootFolderId'] = $config['folderId'];
+            }
+            
+            // Instancia o adaptador passando as opções no terceiro parâmetro
+            $adapter = new \Masbug\Flysystem\GoogleDriveAdapter(
+                $service, 
+                '/backups_polo', // O caminho virtual inicial sempre começa em '/' dentro da pasta configurada
+                $options
+            );
+            
+            // // CORREÇÃO AQUI: Note a barra invertida extra entre Flysystem e GoogleDrive
+            // $adapter = new \Masbug\Flysystem\GoogleDriveAdapter(
+            //     $service, 
+            //     $config['folderId'] ?? '/'
+            // );
 
-            // Criamos uma classe anônima para interceptar o método put e mandar direto pro Google Drive
-            return new class($service, $config['folderId']) extends \Illuminate\Filesystem\FilesystemAdapter {
-                protected $drive;
-                protected $folderId;
-
-                public function __construct($service, $folderId) {
-                    $this->drive = $service;
-                    $this->folderId = $folderId;
-                }
-
-                public function put($path, $contents, $options = []): bool {
-                    try {
-                        $fileMetadata = new \Google\Service\Drive\DriveFile([
-                            'name' => basename($path),
-                            'parents' => [$this->folderId]
-                        ]);
-                        $this->drive->files->create($fileMetadata, [
-                            'data' => $contents,
-                            'mimeType' => 'application/sql',
-                            'uploadType' => 'multipart'
-                        ]);
-                        return true;
-                    } catch (\Exception $e) {
-                        return false;
-                    }
-                }
-            };
+            return new \Illuminate\Filesystem\FilesystemAdapter(
+                new \League\Flysystem\Filesystem($adapter),
+                $adapter,
+                $config
+            );
         });
     }
 }

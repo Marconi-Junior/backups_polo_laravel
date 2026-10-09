@@ -50,4 +50,3 @@ services:
             POSTGRES_PASSWORD: postgres
         networks:
             - app_network
-
