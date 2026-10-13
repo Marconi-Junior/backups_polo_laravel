@@ -34,7 +34,7 @@ use App\Models\Backup;
                     break;
 
                 case 'alternado':
-                    $scheduledCommand->cron('45 11 * * 1,3,5')->timezone('America/Fortaleza');
+                    $scheduledCommand->cron('0 0 * * 1,3,5')->timezone('America/Fortaleza');
                     // $scheduledCommand->everyMinute()->timezone('America/Fortaleza');
                     break;
             }

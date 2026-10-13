@@ -9,17 +9,11 @@ use Masbug\Flysystem\GoogleDriveAdapter;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         \Illuminate\Support\Facades\Storage::extend('google', function ($app, $config) {
@@ -43,24 +37,17 @@ class AppServiceProvider extends ServiceProvider
             
             // Prepara as opções do adaptador
             $options = [];
-            if (!empty($config['folderId'])) {
-                // Isso diz para o pacote: "Use este ID longo como a raiz padrão"
-                $options['rootFolderId'] = $config['folderId'];
+            if (!empty($config['folderId'])) {                
+                $options['rootFolderId'] = $config['folderId']; // Isso diz para o pacote usar este ID longo como a raiz padrão"
             }
             
             // Instancia o adaptador passando as opções no terceiro parâmetro
             $adapter = new \Masbug\Flysystem\GoogleDriveAdapter(
                 $service, 
-                '/backups_polo', // O caminho virtual inicial sempre começa em '/' dentro da pasta configurada
+                $config ['folder'] ?? '/',
                 $options
             );
-            
-            // // CORREÇÃO AQUI: Note a barra invertida extra entre Flysystem e GoogleDrive
-            // $adapter = new \Masbug\Flysystem\GoogleDriveAdapter(
-            //     $service, 
-            //     $config['folderId'] ?? '/'
-            // );
-
+                        
             return new \Illuminate\Filesystem\FilesystemAdapter(
                 new \League\Flysystem\Filesystem($adapter),
                 $adapter,
