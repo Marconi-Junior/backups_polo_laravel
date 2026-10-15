@@ -78,7 +78,7 @@ class RunDatabaseBackup extends Command
                 Notification::route('mail', $emailAdmin)->notify(
                     new BackupStatusNotification(
                         'sucesso',
-                        "O banco '{$backup->banco}' foi processado. Arquivo: {$filename} (Salvo localmente)"
+                        "O banco '{$backup->banco}' foi processado. Arquivo: {$filename} (Salvo localmente e no Google Drive)."
                     )
                 );
                 return Command::SUCCESS;
@@ -87,8 +87,7 @@ class RunDatabaseBackup extends Command
             $erroOutput = $result->errorOutput() ?: "Arquivo gerado vazio ou corrompido";
             throw new \Exception("Erro no pg_dump: " . $erroOutput);
         }
-        catch(\Exception $e)
-        {        
+        catch(\Exception $e){        
             // O bloco catch captura qualquer falha
             $this->error("Falha no processo de backup: " . $e->getMessage());
 

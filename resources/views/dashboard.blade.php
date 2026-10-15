@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Polo de Inovação do IFCE') }}
+            {{ __('Serviços de Monitoramento - Polo de Inovação do IFCE') }}
         </h2>
     </x-slot>
 
@@ -30,6 +30,33 @@
                     <!-- Botão de Ação direcionando para o Index -->
                     <div class="p-6 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-700 flex justify-end">
                         <a href="{{ route('backups.index') }}" class="inline-flex items-center px-6 py-2 bg-emerald-800 hover:bg-emerald-600 text-white text-sm font-medium rounded-md transition-colors shadow-sm">
+                            Acessar
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card de Verificar Conexão -->
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <!-- Ícone Visual de Status de Conexão -->
+                            <div class="p-3 bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 rounded-lg">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold">Verificar Conexão</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            Verifique o status da conexão local e envie mensagens por e-mail e telegram.
+                        </p>
+                    </div>
+                    
+                    <!-- Botão de Ação direcionando para o Index -->
+                    <div class="p-6 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-700 flex justify-end">
+                        <a href="#" class="inline-flex items-center px-6 py-2 bg-emerald-800 hover:bg-emerald-600 text-white text-sm font-medium rounded-md transition-colors shadow-sm">
                             Acessar
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
