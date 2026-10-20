@@ -56,7 +56,7 @@
                     
                     <!-- Botão de Ação direcionando para o Index -->
                     <div class="p-6 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-700 flex justify-end">
-                        <a href="#" class="inline-flex items-center px-6 py-2 bg-emerald-800 hover:bg-emerald-600 text-white text-sm font-medium rounded-md transition-colors shadow-sm">
+                        <a href="{{ route('internet.index') }}" class="inline-flex items-center px-6 py-2 bg-emerald-800 hover:bg-emerald-600 text-white text-sm font-medium rounded-md transition-colors shadow-sm">
                             Acessar
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
