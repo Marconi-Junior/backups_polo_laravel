@@ -23,9 +23,10 @@ class InternetStatusNotification extends Notification
     public function toMail($notifiable): MailMessage{
         
         $statusStr = $this->data['online'] ? 'ONLINE' : 'OFFLINE';
+        $statusIcon = $this->data['online'] ? '✔️' : '❌';
         
         return (new MailMessage)
-            ->subject("Relatório de Conexão: Instância {$statusStr}")
+            ->subject("{$statusIcon} Relatório de Conexão: Instância {$statusStr}")
             ->greeting('Olá, Administrador!')
             ->line('Foi executado um teste de conectividade manual a partir do painel.')
             ->line("Status da Conexão: **{$statusStr}**")

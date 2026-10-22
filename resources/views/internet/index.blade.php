@@ -46,7 +46,7 @@
 
                     <form action="{{ route('internet.test') }}" method="POST" class="mt-6">
                         @csrf
-                        <button type="submit" class="inline-flex items-center px-4 py-2 hover:bg-indigo-700 text-emerald-500 text-base font-semibold uppercase tracking-widest rounded-md shadow-sm transition">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 text-emerald-500 text-base font-semibold uppercase tracking-widest rounded-md shadow-sm transition hover:underline">
                             Executar Teste de Conexão
                         </button>
                     </form>
@@ -70,6 +70,9 @@
 
                         <!-- Botão Telegram (Próxima etapa) -->
                         <button type="button" disabled class="inline-flex items-center px-4 py-2 bg-gray-400 bg-emerald-800 dark:bg-emerald-600 text-white text-xs font-semibold uppercase tracking-widest rounded-md shadow-sm cursor-not-allowed opacity-50">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/>                
+                            </svg>
                             Enviar por Telegram (Pendente)
                         </button>
 
@@ -78,8 +81,8 @@
 
             </div>
             
-            <div class="flex items-center justify-end mt-8 w-full">
-                <a href="{{ route('dashboard') }}" class="text-base text-emerald-600 dark:text-gray-400 hover:underline">Voltar ao Painel</a>
+            <div class="flex items-center justify-end mt-4 w-full">
+                <a href="{{ route('dashboard') }}" class="text-base text-gray-600 dark:text-gray-400 hover:underline">Voltar ao Painel</a>
             </div>
         </div>        
     </div>

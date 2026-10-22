@@ -16,14 +16,14 @@
                         <div class="flex items-center space-x-3 mb-4">
                             <!-- Ícone Visual de Base de Dados / Backup -->
                             <div class="p-3 bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 rounded-lg">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" style="color: green;" viewBox="0 0 24 24" xmlns="http://w3.org">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s8-1.79 8-4"></path>
                                 </svg>
                             </div>
                             <h3 class="text-lg font-bold">Gestão de Backups</h3>
                         </div>
                         <p class="text-sm text-gray-600 dark:text-gray-400">
-                            Cadastre conexões e altere frequências dos dumps SQL dos bancos de dados.
+                            Cadastre conexões e altere frequências dos dumps SQL.
                         </p>
                     </div>
                     
@@ -43,7 +43,7 @@
                         <div class="flex items-center space-x-3 mb-4">
                             <!-- Ícone Visual de Status de Conexão -->
                             <div class="p-3 bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 rounded-lg">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" style="color: green;" viewBox="0 0 24 24" xmlns="http://w3.org">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                                 </svg>
                             </div>
@@ -68,4 +68,3 @@
         </div>
     </div>
 </x-app-layout>
-
