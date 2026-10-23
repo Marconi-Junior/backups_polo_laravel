@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/internet-check', [InternetCheckController::class, 'index'])->name('internet.index');
     Route::post('/internet-check/test', [InternetCheckController::class, 'testConnection'])->name('internet.test');
     Route::post('/internet-check/notify/email', [InternetCheckController::class, 'sendEmailReport'])->name('internet.notify.email');
+    Route::post('/internet-check/send-telegram', [InternetCheckController::class, 'sendTelegramReport'])->name('internet.sendTelegram');
 });
 
 require __DIR__.'/auth.php';

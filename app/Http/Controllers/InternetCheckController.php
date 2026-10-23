@@ -19,7 +19,7 @@ class InternetCheckController extends Controller
     //     $host = $request->input('host', 'google.com');
 
         $host = 'polodeinovacao.ifce.edu.br';
-        $port = 443; // Porta HTTPS padrão web
+        $port = 443; // Porta HTTPS padrão
         $timeout = 2; // Limite de 2 segundos para o ping
         
         $startTime = microtime(true);
@@ -33,28 +33,6 @@ class InternetCheckController extends Controller
         } else {
             $online = false;
         }
-
-        // $host = 'google.com';
-        // $startTime = microtime(true);
-        // $online = false;
-
-        // try {
-        //     // Reutiliza a estratégia do Guzzle/cURL que configurou no AppServiceProvider
-        //     // Forçando IPv4 para compatibilidade total com o WSL2
-        //     $response = Http::withHeaders([
-        //         'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'
-        //     ])->withOptions([
-        //         'curl' => [CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4],
-        //         'connect_timeout' => 5,
-        //         'timeout' => 10
-        //     ])->get("http://{$host}");
-
-        //     if ($response->successful() || $response->status() >= 200 || $response->status() < 500) {
-        //         $online = true;
-        //     }
-        // } catch (\Exception $e) {
-        //     $online = false;
-        // }
 
         $endTime = microtime(true);
         $latency = round(($endTime - $startTime) * 1000);
@@ -83,5 +61,45 @@ class InternetCheckController extends Controller
             ->notify(new InternetStatusNotification($result));
 
         return redirect()->route('internet.index')->with('success', 'Relatório enviado com sucesso por E-mail!');
+    }
+
+    public function sendTelegramReport(Request $request) {
+        
+        $result = session('internet_test_result');
+
+        if (!$result) {
+            return redirect()->route('internet.index')->with('error', 'Por favor, execute o teste de conexão antes de enviar o relatório.');
+        }
+
+        // 1. Monta a mensagem formatada em Markdown
+        $statusEmoji = $result['online'] ? '✅ ONLINE' : '❌ OFFLINE';
+        
+        $message = "*Relatório de Estado da Internet*\n\n";
+        $message .= "Status: {$statusEmoji}\n";
+        $message .= "Host: `{$result['host']}`\n";
+        $message .= "Latência: *{$result['latency']} ms*\n";
+        $message .= "Verificado em: {$result['checked_at']}";
+
+        // 2. Recupera as credenciais do .env
+        $token = env('TELEGRAM_BOT_TOKEN');
+        $chatId = env('TELEGRAM_CHAT_ID');
+
+        try {
+            // 3. Dispara a requisição para a API do Telegram
+            $response = Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
+                'chat_id' => $chatId,
+                'text' => $message,
+                'parse_mode' => 'Markdown', // Permite negrito e formatação de código
+            ]);
+
+            if ($response->successful()) {
+                return redirect()->route('internet.index')->with('success', 'Relatório enviado com sucesso para o Telegram!');
+            }
+
+            return redirect()->route('internet.index')->with('error', 'Falha ao enviar para o Telegram. Verifique as credenciais.');
+
+        } catch (\Exception $e) {
+            return redirect()->route('internet.index')->with('error', 'Erro de conexão com a API do Telegram: ' . $e->getMessage());
+        }
     }
 }

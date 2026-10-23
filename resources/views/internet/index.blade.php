@@ -69,12 +69,16 @@
                         </form>
 
                         <!-- Botão Telegram (Próxima etapa) -->
-                        <button type="button" disabled class="inline-flex items-center px-4 py-2 bg-gray-400 bg-emerald-800 dark:bg-emerald-600 text-white text-xs font-semibold uppercase tracking-widest rounded-md shadow-sm cursor-not-allowed opacity-50">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/>                
-                            </svg>
-                            Enviar por Telegram (Pendente)
-                        </button>
+                        <form action="{{ route('internet.sendTelegram') }}" method="POST">
+                            @csrf
+                            <button type="submit" @if(!session('internet_test_result')) disabled @endif class="inline-flex items-center px-4 py-2 bg-emerald-800 dark:bg-emerald-600 text-white text-xs font-semibold uppercase tracking-widest rounded-md shadow-sm hover:bg-emerald-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.7773,4.42984 C20.8652,3.97177 22.0315,4.8917 21.8394,6.05639 L19.5705,19.8131 C19.3517,21.1395 17.8949,21.9006 16.678,21.2396 C15.6597,20.6865 14.1489,19.8352 12.7873,18.9455 C12.1074,18.5012 10.0255,17.0766 10.2814,16.0625 C10.5002,15.1954 14.0001,11.9375 16.0001,10 C16.7857,9.23893 16.4279,8.79926 15.5001,9.5 C13.1985,11.2383 9.50332,13.8812 8.28136,14.625 C7.20323,15.2812 6.64031,15.3932 5.96886,15.2812 C4.74273,15.0769 3.60596,14.7605 2.67788,14.3758 C1.42351,13.8558 1.48461,12.132 2.67703,11.63 L19.7773,4.42984 Z" id="路径">
+                                    <!-- <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/>                 -->
+                                </svg>
+                                Enviar por Telegram
+                            </button>
+                        </form>
 
                     </div>
                 </div>
