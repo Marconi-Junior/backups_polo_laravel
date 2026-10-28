@@ -1,9 +1,8 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ $backup->exists ? __('Editar Conexão') : __('Nova Conexão') }}
-        </h2>
-    </x-slot>
+    
+    <h2 class="font-semibold text-center mt-8 text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        {{ $backup->exists ? __('Editar Conexão') : __('Nova Conexão') }}
+    </h2>
 
     <div class="py-12">
         <div class="w-full mx-auto sm:px-6 lg:px-8" style="max-width: 30%">
