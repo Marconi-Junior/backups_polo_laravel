@@ -135,8 +135,7 @@
             flex: 1;
             height: 1px;
             background: #dbdbdb;
-        }
-
+        }        
         /* Garante que em telas menores o empilhamento fique bonito e centralizado */
         @media (max-width: 768px) {
             body {
@@ -166,116 +165,116 @@
 </head>
 
 <body>
-    
-    <div class="polo-container">
-        
-        <!-- COLUNA ESQUERDA: Degradê Verde Polo, Título e Subtítulo -->
-        <div class="polo-left">
-            <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 14px;">
-                <img src="{{ asset('if.svg') }}" alt="Logo" style="width: 26px; height: 26px; filter: brightness(0) invert(1);" onerror="this.style.display='none'">
-                <span>{{ config('app.name', 'Laravel') }}</span>
-            </div>
 
-            <div style="margin: auto 0;">
-                <h1 style="font-size: 34px; font-weight: 800; line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.5px;">
-                    Serviços de Monitoramento
-                </h1>
-                <p style="font-size: 14px; color: rgba(255,255,255,0.9); line-height: 1.45; font-weight: 400;">
-                    Gerenciador de backups e conexões de internet.
-                </p>
-            </div>
-            
-            <div style="font-size: 11px; color: rgba(255,255,255,0.6);">
-                v{{ app()->version() }} &copy; {{ date('Y') }}
-            </div>
+<div class="polo-container">
+    
+    <!-- COLUNA ESQUERDA: Degradê Verde Polo, Título e Subtítulo -->
+    <div class="polo-left">
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 14px;">
+            <img src="{{ asset('if.svg') }}" alt="Logo" style="width: 26px; height: 26px; filter: brightness(0) invert(1);" onerror="this.style.display='none'">
+            <span>{{ config('app.name', 'Laravel') }}</span>
         </div>
 
-        <!-- COLUNA DIREITA: Campos do Formulário -->
-        <div class="polo-right">
-            <div class="form-box">
-                            
-                <!-- Bloco do Formulário -->
-                <div style="background: #ffffff; border: 1px solid #dbdbdb; padding: 30px 25px; border-radius: 8px;">
-                    <!-- <h1 style="font-size: 14px; color: #1bad63; line-height: 1.45; font-weight: 500; margin-botton: 20;">Login:</h1> -->
-                     <div class="polo-divider">
-                        <div class="polo-line"></div>
-                        <span style="font-size: 11px; color: #8e8e8e; font-weight: 600; margin: 0 10px; text-transform: uppercase;">Login</span>
-                        <div class="polo-line"></div>
-                    </div>
-
-                    @if (session('status'))
-                        <div style="color: #2fb344; font-size: 13px; margin-bottom: 15px; text-align: center; font-weight: 500;">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('login') }}" id="loginForm">
-                        @csrf
-
-                        <input 
-                            id="email" 
-                            type="email" 
-                            name="email" 
-                            value="{{ old('email') }}" 
-                            placeholder="Telefone, nome de usuário ou email" 
-                            required 
-                            autofocus 
-                            autocomplete="username"
-                            class="polo-input"
-                        >
-                        @if($errors->get('email'))
-                            <span style="color: #ed4956; font-size: 12px; display: block; margin-bottom: 10px;">{{ $errors->first('email') }}</span>
-                        @endif
-
-                        <input 
-                            id="password" 
-                            type="password" 
-                            name="password"
-                            placeholder="Senha" 
-                            required 
-                            autocomplete="current-password"
-                            class="polo-input"
-                        >
-                        @if($errors->get('password'))
-                            <span style="color: #ed4956; font-size: 12px; display: block; margin-bottom: 10px;">{{ $errors->first('password') }}</span>
-                        @endif
-
-                        <div style="display: flex; align-items: center; margin: 14px 0 12px 0;">
-                            <label style="display: inline-flex; align-items: center; cursor: pointer; font-size: 12px; color: #8e8e8e;">
-                                <input id="remember_me" type="checkbox" name="remember" style="margin-right: 8px; width: 14px; height: 14px; accent-color: #1bad63;">
-                                Salvar informações de login
-                            </label>
-                        </div>
-
-                        <button type="submit" class="polo-btn">
-                            Entrar
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Bloco de Links e Cadastro -->
-                <div style="background: #ffffff; border: 1px solid #dbdbdb; padding: 20px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 14px; color: #262626;">
-                    @if (Route::has('register'))
-                        Não tem uma conta? 
-                        <a href="{{ route('register') }}" style="color: #1bad63; font-weight: 600; text-decoration: none;">
-                            Cadastre-se
-                        </a>
-                    @endif
-
-                    <div class="polo-divider">
-                        <div class="polo-line"></div>
-                        <span style="font-size: 11px; color: #8e8e8e; font-weight: 600; margin: 0 10px; text-transform: uppercase;">Ou</span>
-                        <div class="polo-line"></div>
-                    </div>
-
-                    @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" style="color: #054f2c; font-size: 12px; text-decoration: none; font-weight: 500;">
-                            Esqueceu a senha?
-                        </a>
-                    @endif
-                </div>
-
-            </div>
+        <div style="margin: auto 0;">
+            <h1 style="font-size: 34px; font-weight: 800; line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.5px;">
+                Serviços de Monitoramento
+            </h1>
+            <p style="font-size: 14px; color: rgba(255,255,255,0.9); line-height: 1.45; font-weight: 400;">
+                Gerenciador de backups e conexões de internet.
+            </p>
+        </div>
+        
+        <div style="font-size: 11px; color: rgba(255,255,255,0.6);">
+            v{{ app()->version() }} &copy; {{ date('Y') }}
         </div>
     </div>
+
+    <!-- COLUNA DIREITA: Campos do Formulário -->
+    <div class="polo-right">
+        <div class="form-box">
+                        
+            <!-- Bloco do Formulário -->
+            <div style="background: #ffffff; border: 1px solid #dbdbdb; padding: 30px 25px; border-radius: 8px;">
+                <!-- <h1 style="font-size: 14px; color: #1bad63; line-height: 1.45; font-weight: 500; margin-botton: 20;">Login:</h1> -->
+                    <div class="polo-divider">
+                    <div class="polo-line"></div>
+                    <span style="font-size: 11px; color: #8e8e8e; font-weight: 600; margin: 0 10px; text-transform: uppercase;">Login</span>
+                    <div class="polo-line"></div>
+                </div>
+
+                @if (session('status'))
+                    <div style="color: #2fb344; font-size: 13px; margin-bottom: 15px; text-align: center; font-weight: 500;">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('login') }}" id="loginForm">
+                    @csrf
+
+                    <input 
+                        id="email" 
+                        type="email" 
+                        name="email" 
+                        value="{{ old('email') }}" 
+                        placeholder="Telefone, nome de usuário ou email" 
+                        required 
+                        autofocus 
+                        autocomplete="username"
+                        class="polo-input"
+                    >
+                    @if($errors->get('email'))
+                        <span style="color: #ed4956; font-size: 12px; display: block; margin-bottom: 10px;">{{ $errors->first('email') }}</span>
+                    @endif
+
+                    <input 
+                        id="password" 
+                        type="password" 
+                        name="password"
+                        placeholder="Senha" 
+                        required 
+                        autocomplete="current-password"
+                        class="polo-input"
+                    >
+                    @if($errors->get('password'))
+                        <span style="color: #ed4956; font-size: 12px; display: block; margin-bottom: 10px;">{{ $errors->first('password') }}</span>
+                    @endif
+
+                    <div style="display: flex; align-items: center; margin: 14px 0 12px 0;">
+                        <label style="display: inline-flex; align-items: center; cursor: pointer; font-size: 12px; color: #8e8e8e;">
+                            <input id="remember_me" type="checkbox" name="remember" style="margin-right: 8px; width: 14px; height: 14px; accent-color: #1bad63;">
+                            Salvar informações de login
+                        </label>
+                    </div>
+
+                    <button type="submit" class="polo-btn">
+                        Entrar
+                    </button>
+                </form>
+            </div>
+
+            <!-- Bloco de Links e Cadastro -->
+            <div style="background: #ffffff; border: 1px solid #dbdbdb; padding: 20px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 14px; color: #262626;">
+                @if (Route::has('register'))
+                    Não tem uma conta? 
+                    <a href="{{ route('register') }}" style="color: #1bad63; font-weight: 600; text-decoration: none;">
+                        Cadastre-se
+                    </a>
+                @endif
+
+                <div class="polo-divider">
+                    <div class="polo-line"></div>
+                    <span style="font-size: 11px; color: #8e8e8e; font-weight: 600; margin: 0 10px; text-transform: uppercase;">Ou</span>
+                    <div class="polo-line"></div>
+                </div>
+
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}" style="color: #054f2c; font-size: 12px; text-decoration: none; font-weight: 500;">
+                        Esqueceu a senha?
+                    </a>
+                @endif
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>

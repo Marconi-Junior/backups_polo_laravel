@@ -1,22 +1,24 @@
+<p align="right"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="100" alt="Laravel Logo"></a></p>
+
 # Sistema de Monitoramento de Backups e Conexão de Internet
 
 Um sistema web robusto desenvolvido em **Laravel 13** projetado para automatizar a geração de dumps de bancos de dados, armazená-los localmente e na nuvem, além de fornecer ferramentas para testes de latência e conectividade de rede (ping).
 
 ---
 
-## 🚀 Funcionalidades Principais
+## Funcionalidades Principais
 
-### 🔒 Autenticação e Perfil
+### Autenticação e Perfil
 * **Acesso Seguro:** Tela de login compatível com usuário ou e-mail e senha.
 * **Autogestão:** Opções nativas para cadastro de novos usuários e recuperação de senha ("Esqueci a senha").
 * **Perfil do Usuário:** Menu drop-down no canto superior direito para edição dos dados da conta e logout.
 
-### 📊 Dashboard Central
+### Dashboard Central
 * Interface limpa contendo dois cards direcionais de acesso rápido:
   1. **Gerenciar Backups** (Acesso ao CRUD de instâncias).
   2. **Testar Conexão** (Ferramenta de monitoramento de ping).
 
-### 🗄️ Gerenciamento de Backups (CRUD)
+### Gerenciamento de Backups (CRUD)
 * **Controle Total:** Criação, edição, visualização e exclusão de conexões de bancos de dados.
 * **Metadados da Conexão:** Suporte a IP/Host, Porta, Nome do Banco, Usuário e Senha.
 * **Agendamento Flexível:** Definição da frequência dos dumps à meia-noite via seletor:
@@ -27,7 +29,7 @@ Um sistema web robusto desenvolvido em **Laravel 13** projetado para automatizar
 * **Armazenamento Híbrido:** Os dumps gerados são salvos localmente no repositório do projeto e uma cópia de segurança é enviada para o **Google Drive**.
 * **Alertas Automatizados:** Disparo de notificações por e-mail informando o sucesso ou falha da rotina.
 
-### 🌐 Teste de Conexão (Ping)
+### Teste de Conexão (Ping)
 * **Disparo sob Demanda:** Botão dedicado para execução imediata do teste de ping.
 * **Relatório Dinâmico:** Exibição em tempo real dos resultados técnicos e status diretamente na tela.
 * **Configuração Centralizada:** O host de destino do teste é gerenciável diretamente a nível de código para maior segurança estrutural.
@@ -35,16 +37,17 @@ Um sistema web robusto desenvolvido em **Laravel 13** projetado para automatizar
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
-* **Framework:** Laravel 13.x
-* **Linguagem:** PHP 8.3+
+* **Framework:** Laravel 13.31.0
+* **Container:** Docker 29.7.2
+* **Linguagem:** PHP 8.5.0
 * **Banco de Dados:** PostgreSQL (compatível com os drivers PDO)
 * **Integrações:** Google Drive API (via Flysystem Storage Provider) & Telegram Bot API
 
 ---
 
-## 🔧 Instalação e Configuração
+## Instalação e Configuração
 
 ### 1. Clonar o Repositório
 ```bash
@@ -106,7 +109,7 @@ php artisan migrate
 
 ---
 
-## ⏰ Cron e Agendamentos (Task Scheduling)
+## Cron e Agendamentos (Task Scheduling)
 
 Para que as rotinas de dump à meia-noite funcionem corretamente, certifique-se de que o Scheduler do Laravel está ativo no Cron do seu servidor:
 
