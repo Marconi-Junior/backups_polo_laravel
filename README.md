@@ -1,60 +1,117 @@
-<p align="right"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="150" alt="Laravel Logo"></a></p>
+# Sistema de Monitoramento de Backups e Conexão de Internet
 
-<!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p> -->
+Um sistema web robusto desenvolvido em **Laravel 13** projetado para automatizar a geração de dumps de bancos de dados, armazená-los localmente e na nuvem, além de fornecer ferramentas para testes de latência e conectividade de rede (ping).
 
-<!-- <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p> -->
+---
 
-## About Laravel
+## 🚀 Funcionalidades Principais
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🔒 Autenticação e Perfil
+* **Acesso Seguro:** Tela de login compatível com usuário ou e-mail e senha.
+* **Autogestão:** Opções nativas para cadastro de novos usuários e recuperação de senha ("Esqueci a senha").
+* **Perfil do Usuário:** Menu drop-down no canto superior direito para edição dos dados da conta e logout.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 📊 Dashboard Central
+* Interface limpa contendo dois cards direcionais de acesso rápido:
+  1. **Gerenciar Backups** (Acesso ao CRUD de instâncias).
+  2. **Testar Conexão** (Ferramenta de monitoramento de ping).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🗄️ Gerenciamento de Backups (CRUD)
+* **Controle Total:** Criação, edição, visualização e exclusão de conexões de bancos de dados.
+* **Metadados da Conexão:** Suporte a IP/Host, Porta, Nome do Banco, Usuário e Senha.
+* **Agendamento Flexível:** Definição da frequência dos dumps à meia-noite via seletor:
+  * Trimestral
+  * Mensal
+  * Semanal
+  * 3x por semana (seg-qua-sex)
+* **Armazenamento Híbrido:** Os dumps gerados são salvos localmente no repositório do projeto e uma cópia de segurança é enviada para o **Google Drive**.
+* **Alertas Automatizados:** Disparo de notificações por e-mail informando o sucesso ou falha da rotina.
 
-## Learning Laravel
+### 🌐 Teste de Conexão (Ping)
+* **Disparo sob Demanda:** Botão dedicado para execução imediata do teste de ping.
+* **Relatório Dinâmico:** Exibição em tempo real dos resultados técnicos e status diretamente na tela.
+* **Configuração Centralizada:** O host de destino do teste é gerenciável diretamente a nível de código para maior segurança estrutural.
+* **Canais de Notificação:** Botões integrados para encaminhar o relatório gerado por **E-mail** ou **Telegram**.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Tecnologias Utilizadas
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+* **Framework:** Laravel 13.x
+* **Linguagem:** PHP 8.3+
+* **Banco de Dados:** PostgreSQL (compatível com os drivers PDO)
+* **Integrações:** Google Drive API (via Flysystem Storage Provider) & Telegram Bot API
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🔧 Instalação e Configuração
 
+### 1. Clonar o Repositório
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Instalar Dependências
+```bash
+composer install
+npm install && npm run dev
+```
 
-## Contributing
+### 3. Configuração de Ambiente (`.env`)
+Copie o arquivo de exemplo e configure suas variáveis:
+```bash
+cp .env.example .env
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Abra o arquivo `.env` e configure os parâmetros essenciais:
+```env
+# Banco de dados do painel
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=nome_do_banco
+DB_USERNAME=usuario
+DB_PASSWORD=senha
 
-## Code of Conduct
+# Configuração de E-mail (SMTP)
+MAIL_MAILER=smtp
+MAIL_SCHEME=null
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_ENCRYPTION=tls
+MAIL_USERNAME="seu-email@gmail.com"
+MAIL_PASSWORD="senha_de_app_16_caracteres"
+MAIL_FROM_ADDRESS="seu-email@gmail.com"
+MAIL_FROM_NAME="nome_banco"
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Integração Google Drive
+GOOGLE_DRIVE_CLIENT_ID=seu_client_id
+GOOGLE_DRIVE_CLIENT_SECRET=seu_client_secret
+GOOGLE_DRIVE_REFRESH_TOKEN=seu_refresh_token
+GOOGLE_DRIVE_FOLDER_ID=seu_folder_id
+GOOGLE_DRIVE_FOLDER_NAME="/nome_repositorio"
 
-## Security Vulnerabilities
+# Integração Telegram
+TELEGRAM_BOT_TOKEN=seu_token_do_bot
+TELEGRAM_CHAT_ID=seu_chat_id_ou_canal
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Inicializar a Aplicação
+Configure a chave da aplicação, execute as migrations com as tabelas de usuários e conexões, e popule o banco se necessário:
+```bash
+php artisan key:generate
+php artisan migrate
+```
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## ⏰ Cron e Agendamentos (Task Scheduling)
+
+Para que as rotinas de dump à meia-noite funcionem corretamente, certifique-se de que o Scheduler do Laravel está ativo no Cron do seu servidor:
+
+```bash
+* * * * * cd /caminho-do-seu-projeto && php artisan schedule:run >> /dev/null 2>&1
+```
+
+O mapeamento interno em `routes/console.php` (ou na classe `Kernel`) processará de forma transparente os agendamentos cadastrados (trimestral, mensal, semanal ou 3x na semana) garantindo a execução pontual à **00:00**.
